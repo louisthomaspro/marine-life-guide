@@ -1,8 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import React, { Fragment } from "react";
-import CustomInfiniteHits from "../../components/CustomInfinitHits";
-import CustomSearchBox from "../../components/CustomSearchBox";
 
 const Search: NextPage = () => {
   return (
