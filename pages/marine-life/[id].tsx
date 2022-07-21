@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { getMarineLife } from "../../firebase/marine-life.firestore";
 
 const MarineLife: NextPage<{ marineLifeData: any }> = ({ marineLifeData }) => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const MarineLife: NextPage<{ marineLifeData: any }> = ({ marineLifeData }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params!;
-  // const marineLifeData = await getLife(id!.toString());
+  const marineLifeData = await getMarineLife(id!.toString());
 
   if (marineLifeData) {
     return { props: { marineLifeData } };
