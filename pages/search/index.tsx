@@ -13,12 +13,12 @@ const Search: NextPage = () => {
         Search
       </Typography>
 
-      <InstantSearch indexName="sea-guide" searchClient={algolia}>
+      {/* <InstantSearch indexName="sea-guide" searchClient={algolia}>
         <Box sx={{ pb: 2 }}>
           <CustomSearchBox />
         </Box>
         <CustomInfiniteHits />
-      </InstantSearch>
+      </InstantSearch> */}
     </Fragment>
   );
 };
