@@ -1,8 +1,8 @@
-import { ImageList, ImageListItem, Typography } from "@mui/material";
+import { ImageList, ImageListItem, Link, Typography } from "@mui/material";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import BackButton from "../../components/BackButton";
 import { getMarineLife } from "../../firebase/marine-life.firestore";
 
 const MarineLife: NextPage<{ marineLifeData: any }> = ({ marineLifeData }) => {
@@ -13,8 +13,8 @@ const MarineLife: NextPage<{ marineLifeData: any }> = ({ marineLifeData }) => {
 
   return (
     <>
-      {/* <BackButton />
-      <FavoriteButton /> */}
+      <BackButton />
+      {/* <FavoriteButton /> */}
       <Typography component="h1">
         {marineLifeData.french_common_name}
       </Typography>
