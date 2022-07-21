@@ -1,21 +1,21 @@
-import { doc, DocumentData, getDoc, setDoc } from "firebase/firestore";
-import { ILife } from "../models/Life";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { IMarineLife } from "../models/MarineLife";
 import { firestore } from "./firestore";
 
 const collectionName = "lives";
 
 // https://github.com/ShekMak/todo-next/blob/main/firebase/firestore.ts
 
-export const getLife = (id: string) => {
+export const getMarineLife = (id: string) => {
   const document = getDoc(doc(firestore, `${collectionName}/${id}`));
-  return document.then((doc) => doc.data())  as Promise<ILife>;
+  return document.then((doc) => doc.data())  as Promise<IMarineLife>;
 };
 
-export const setLife = (data: ILife, id: string) => {
+export const setMarineLife = (data: IMarineLife, id: string) => {
   return setDoc(doc(firestore, collectionName, id), data);
 };
 
-export const setLifeFromINaturalist = async (inaturalistId: string) => {
+export const setMarineLifeFromINaturalist = async (inaturalistId: string) => {
   let data: any = {};
   try {
     const res = await fetch(
@@ -27,7 +27,7 @@ export const setLifeFromINaturalist = async (inaturalistId: string) => {
     console.log(err);
   }
 
-  let lifeData: ILife = {
+  let marineLifeData: IMarineLife = {
     id: data.id,
     scientific_name: data.name ?? null,
     french_common_name: data.preferred_common_name ?? null,
@@ -37,13 +37,13 @@ export const setLifeFromINaturalist = async (inaturalistId: string) => {
     conservation_status: data.conservation_status?.status ?? null,
   };
   (data.taxon_photos as any[]).forEach((element) => {
-    lifeData.photos.push({
+    marineLifeData.photos.push({
       medium_url: element.photo.medium_url,
       id: element.photo.id,
     });
   });
-  console.log(lifeData);
-  return setDoc(doc(firestore, collectionName, inaturalistId), lifeData);
+  console.log(marineLifeData);
+  return setDoc(doc(firestore, collectionName, inaturalistId), marineLifeData);
 };
 
 export const populate = async () => {
@@ -54,7 +54,7 @@ export const populate = async () => {
 
   let result = true;
   for (let id of ids) {
-    result = await setLifeFromINaturalist(id.toString())
+    result = await setMarineLifeFromINaturalist(id.toString())
       .then((doc) => {
         console.log("Doc added", doc);
         return true;
