@@ -1,4 +1,4 @@
-export interface ILife {
+export interface IMarineLife {
   id: number;
   scientific_name: string;
   french_common_name: string;
