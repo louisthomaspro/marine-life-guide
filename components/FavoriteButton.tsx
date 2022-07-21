@@ -32,7 +32,7 @@ export default function FavoriteButton(props: any) {
     } else {
       if (isFavorite) {
         removeFavorite(props.lifeId, user.email).then(() => {
-          const newFavorites = userData.favorites.filter(
+          const newFavorites = userData!.favorites.filter(
             (id) => id !== props.lifeId
           );
           const newUserData = { ...userData, favorites: newFavorites };
@@ -43,7 +43,7 @@ export default function FavoriteButton(props: any) {
         });
       } else {
         addFavorite(props.lifeId, user.email).then(() => {
-          userData.favorites.push(props.lifeId);
+          userData!.favorites.push(props.lifeId);
           const newUserData = userData;
           console.log("newA", newUserData);
           setUserData(newUserData);

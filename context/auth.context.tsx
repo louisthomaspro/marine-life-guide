@@ -4,12 +4,19 @@ import { auth } from "../firebase/auth";
 import { createUser, getUser } from "../firebase/user.firestore";
 import { IUser } from "../models/User";
 
-const AuthContext = createContext({
+const initValues: {
+  user: any;
+  userData: IUser | null;
+  setUserData: any;
+  loading: boolean;
+} = {
   user: null,
   userData: null,
   setUserData: null,
   loading: true,
-} as any);
+};
+
+const AuthContext = createContext(initValues);
 
 export function AuthContextProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
